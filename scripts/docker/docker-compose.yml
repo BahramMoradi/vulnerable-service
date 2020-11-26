@@ -1,0 +1,8 @@
+version: '3'
+services:
+  gateway-service:
+    container_name: vulnerable
+    build:
+      context: ../..
+    ports:
+      - "8080:8080"

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulnerable
+  labels:
+    app: vulnerable
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vulnerable
+  template:
+    metadata:
+      labels:
+        app: vulnerable
+    spec:
+      containers:
+        - name: vulnerable
+          image: vulnerable:latest
+          imagePullPolicy: Never # vi poller ikke fra dockerhub
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 10
+
