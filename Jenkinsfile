@@ -16,15 +16,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'gradle clean'
-                sh 'gradle build -x test'
+                bat 'gradle clean'
+                bat 'gradle build -x test'
             }
         }
         stage('Test') {
             steps {
-                sh 'gradle test'
+                bat 'gradle test'
             }
         }
+
+    }
 	post {
          always {
              echo 'Post jobs started...'
