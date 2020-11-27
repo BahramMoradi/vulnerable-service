@@ -22,6 +22,23 @@ pipeline {
                 bat 'gradlew test'
             }
         }
+        stage('Build Docker Image') {
+            echo 'Building docker image'
+             steps {
+                 bat 'jenkins-build-docker-image-local-windows.cmd'
+             }
+        }
+        stage('Run docker container') {
+             steps {
+                 bat 'jenkins-spin-up-docker-container-local-windows.cmd'
+             }
+        }
+
+        stage('ZAP Test') {
+             steps {
+                echo 'No implemented yet'
+             }
+        }
 
     }
 	post {
