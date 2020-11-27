@@ -7,22 +7,19 @@ pipeline {
         cron(env.BRANCH_NAME == 'main' ? 'H 0 * * *' : '')
         pollSCM('*/5 * * * *')
     }
-    tools {
-        gradle "Gradle 6.7.1"
-    }
     environment {
         CI = 'true'
     }
     stages {
         stage('Build') {
             steps {
-                bat 'gradlew.bat clean'
-                bat 'gradlew.bat build -x test'
+                bat 'gradlew clean'
+                bat 'gradlew build -x test'
             }
         }
         stage('Test') {
             steps {
-                bat 'gradlew.bat test'
+                bat 'gradlew test'
             }
         }
 
