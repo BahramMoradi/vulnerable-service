@@ -23,8 +23,9 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            echo 'Building docker image'
+
              steps {
+                 echo 'Building docker image'
                  bat 'jenkins-build-docker-image-local-windows.cmd'
              }
         }
