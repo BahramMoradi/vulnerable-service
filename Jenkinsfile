@@ -35,7 +35,7 @@ pipeline {
              }
         }
 
-        stage('ZAP Test') {
+        stage('Security Test') {
              steps {
                 echo 'Run Zap security test'
                 bat 'scripts\\zap\\zap-test-using-rest-api.cmd'
