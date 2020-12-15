@@ -3,17 +3,15 @@ REM ZAP daemon skal startes a en anden job
 REM call echo "start a daemon zap"
 REM call java -jar %ZAPPROXY_HOME%\zap-2.9.0.jar -daemon -port 8090 -config api.disablekey=true
 REM do spider scan
-call echo "do a spider scan"
+call echo "spider scan"
 call curl "http://localhost:8090/JSON/spider/action/scan/?zapapiformat=JSON&formMethod=GET&url=http://localhost:8181/v3/api-docs"
 
-call echo "lav aktiv scanning "
+call echo "aktive scan"
 call curl "http://localhost:8090/JSON/ascan/action/scan/?zapapiformat=JSON&formMethod=GET&url=http://localhost:8181/v3/api-docs&recurse=&inScopeOnly=&scanPolicyName=&method=&postData=&contextId="
 call echo "Vent 20 sekunder"
 call timeout 20
 REM gem report et bestemt sted
 call curl "http://127.0.0.1:8090/OTHER/core/other/jsonreport/?formMethod=GET" > ZAP_Report.json
-
-
 call curl "http://127.0.0.1:8090/JSON/alert/view/alertsSummary/"
 call curl "http://127.0.0.1:8090/JSON/alert/view/alertsSummary/" | findstr "\"High\":0"
 echo %ERRORLEVEL%
